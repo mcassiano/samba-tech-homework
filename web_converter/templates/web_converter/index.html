@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Conversor web</title>
+  <meta name="description" content="Conversor de vídeos web usando Zencoder. Projeto prático do processo seletivo da Samba Tech">
+  <meta name="author" content="Matheus Cassiano Candido">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.5/semantic.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.5/components/icon.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.5/components/input.min.css">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+  <script type="text/javascript" src="/static/js/s3upload.js"></script>
+  <script type="text/javascript" src="/static/js/scripts.js"></script>
+
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.6/components/progress.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.6/components/progress.min.css">
+
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+  <div id="background">
+    <div id="content">
+
+      <br>
+      <div class="logo">
+        <img src="/static/image/cloud.png" class="cloud" />
+      </div>
+
+      <div>
+
+        <p>
+          <label for="file" class="ui icon button">
+            <i class="file icon"></i>
+            Selecionar vídeo</label>
+
+            <input onchange="s3_upload();" type="file" id="file" style="display:none" />
+        </p>
+
+        <div class="ui indicating progress" id="status">
+          <div class="bar">
+            <div class="progress"></div>
+          </div>
+          <div class="label"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

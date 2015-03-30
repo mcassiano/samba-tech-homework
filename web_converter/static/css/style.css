@@ -1,0 +1,32 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+html, body {
+	margin: 0px;
+	padding: 0px;
+}
+
+html { 
+  background: #eee;
+  height: 100%;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	min-height: 100%;
+}
+
+#content {
+	padding: 0px;
+	margin: 0px auto;
+	text-align: center;
+	color: #000;
+	width: 100%;
+    height: 100%;
+}
+
+.logo {
+	margin: 0 auto;
+}
+
+.cloud {
+	width: 256px;
+}
