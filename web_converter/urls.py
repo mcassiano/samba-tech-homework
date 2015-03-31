@@ -4,6 +4,9 @@ import views
 
 
 urlpatterns = patterns('',
-    url(r'^$', views.UploadView.as_view(), name='upload_view'),
-    url(r'^sign_s3$', views.sign_s3, name='sign_s3')
+    url(r'^$', views.upload_view, name='upload_view'),
+    url(r'^sign_s3$', views.sign_s3, name='sign_s3'),
+    
+    url(r'^add_job$', views.add_job, name='add_job'),
+    url(r'^get_status_on_job$', views.get_status_on_job, name='get_status_on_job')
 )

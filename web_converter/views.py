@@ -2,12 +2,42 @@ import time, os, json, base64, urllib, hmac, sha
 
 from django.views.generic import FormView
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
+
+from samba.settings import ZENCODER_API_KEY
+from samba.settings import AWS_SECRET_ACCESS_KEY
+from samba.settings import AWS_ACCESS_KEY_ID
+from samba.settings import AWS_STORAGE_BUCKET_NAME
+
+from zencoder import Zencoder
+
+def add_job(request):
+
+    client = Zencoder(ZENCODER_API_KEY)
+
+    s3_input_file = request.GET.get('s3_input_file')
+    response = client.job.create(s3_input_file)
+
+    json_response = json.dumps(response.body)
+
+    return HttpResponse(json_response)
+
+def get_status_on_job(request):
+
+    client = Zencoder(ZENCODER_API_KEY)
+    zencoder_job_id = request.GET.get('zencoder_job_id')
+
+    response = client.job.progress(zencoder_job_id)
+    json_response = json.dumps(response.body)
+
+    return HttpResponse(json_response)
+
 
 def sign_s3(request):
 
-    AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    S3_BUCKET = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_ACCESS_KEY = AWS_ACCESS_KEY_ID
+    AWS_SECRET_KEY = AWS_SECRET_ACCESS_KEY
+    S3_BUCKET = AWS_STORAGE_BUCKET_NAME
 
     object_name = request.GET.get('s3_object_name')
     mime_type = request.GET.get('s3_object_type')
@@ -40,5 +70,7 @@ def sign_s3(request):
         'url': url
     }))
 
-class UploadView(FormView):
+
+def upload_view(request):
     template_name = 'web_converter/index.html'
+    return render_to_response(template_name)
