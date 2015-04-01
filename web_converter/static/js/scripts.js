@@ -33,6 +33,8 @@ function s3_upload(){
                 var job_id = data.id;
                 var output_url = data.outputs[0].url;
 
+                console.log(job_id);
+
                 $('#status').progress({
                     percent: 0
                 });
@@ -51,16 +53,16 @@ function s3_upload(){
                                 percent: data.progress
                             });
 
-                            if (data.state == "finished")
+                            if (data.outputs[0].state == "finished") {
                                 clearInterval();
+                                $('.label').html('<a href="' + output_url + '">Assista ao vídeo</a>');
+                            }
                     });
 
                 }, 1000);
 
-                $('.label').html('Vídeo em ' + output_url);
 
             });
-
 
 
         },
