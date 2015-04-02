@@ -17,16 +17,20 @@ body {
 #content {
 	padding: 0px;
 	margin: 0px auto;
-	text-align: center;
 	color: #000;
-	width: 100%;
-    height: 100%;
+	width: 600px;
 }
 
-.logo {
-	margin: 0 auto;
+.container {
+	text-align: center;
+}
+
+#player {
+	width: 700px;
 }
 
 .cloud {
 	width: 256px;
+	display: block;
+    margin: auto;
 }

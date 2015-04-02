@@ -67,7 +67,7 @@ WSGI_APPLICATION = 'samba.wsgi.application'
 DATABASES = {}
 
 try:
-    import local_settings
+    from local_settings import *
 except:
     DATABASES['default'] =  dj_database_url.config()
 
@@ -94,3 +94,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+LANGUAGE_CODE = 'pt-br'
+USE_I18N = True
+USE_L10N = True

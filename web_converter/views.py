@@ -3,6 +3,7 @@ import time, os, json, base64, urllib, hmac, sha
 from django.views.generic import FormView
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.core.urlresolvers import reverse
 
 from samba.settings import ZENCODER_API_KEY
 from samba.settings import AWS_SECRET_ACCESS_KEY
@@ -11,11 +12,13 @@ from samba.settings import AWS_STORAGE_BUCKET_NAME
 
 from zencoder import Zencoder
 
+from .models import Video
+
 def add_job(request):
 
     client = Zencoder(ZENCODER_API_KEY)
 
-    s3_input_file = request.GET.get('s3_input_file')
+    s3_input_file = request.POST.get('s3_input_file')
     response = client.job.create(s3_input_file)
 
     json_response = json.dumps(response.body)
@@ -25,7 +28,7 @@ def add_job(request):
 def get_status_on_job(request):
 
     client = Zencoder(ZENCODER_API_KEY)
-    zencoder_job_id = request.GET.get('zencoder_job_id')
+    zencoder_job_id = request.POST.get('zencoder_job_id')
 
     response = client.job.progress(zencoder_job_id)
     json_response = json.dumps(response.body)
@@ -72,5 +75,29 @@ def sign_s3(request):
 
 
 def upload_view(request):
+
     template_name = 'web_converter/index.html'
     return render_to_response(template_name)
+
+def video_detail(request, identifier):
+
+    template_name = 'web_converter/detail.html'
+    video = Video.objects.get(identifier=identifier)
+
+    context = {
+        'video': video
+    }
+
+    return render_to_response(template_name, context)
+
+def save_video_details(request):
+
+    video_url = request.POST.get("video_url")
+
+    video = Video()
+    video.url = video_url
+
+    video.save()
+
+    return HttpResponse(reverse('video_detail', 
+        kwargs={'identifier': video.identifier}))
