@@ -1,6 +1,6 @@
 import time, os, json, base64, urllib, hmac, sha
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 
 from samba.settings import AWS_SECRET_ACCESS_KEY
 from samba.settings import AWS_ACCESS_KEY_ID
@@ -14,6 +14,9 @@ def get_signed_s3_url(request):
 
     object_name = request.GET.get('s3_object_name')
     mime_type = request.GET.get('s3_object_type')
+
+    if object_name == None or mime_type == None:
+        return HttpResponseBadRequest()
 
     # don't give user full control over filename - avoid ability to overwrite files
     random = base64.urlsafe_b64encode(os.urandom(2))

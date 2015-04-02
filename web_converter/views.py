@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 
 from .models import Video
 
@@ -24,6 +24,9 @@ def video_detail(request, identifier):
 def save_video_details(request):
 
     video_url = request.POST.get("video_url")
+
+    if video_url == None:
+        return HttpResponseBadRequest()
 
     video = Video()
     video.url = video_url
