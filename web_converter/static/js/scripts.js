@@ -16,7 +16,7 @@ $(document).ready(function () {
 });
 
 function on_zencoder_job_done(output_url) {
-    $.post("/web_converter/save_video_details",
+    $.post("/save_video_details",
         {video_url: output_url}).done(function(data) {
             $('.label').html('<a href="' + data + '">Assista ao vídeo</a>');
     });
@@ -24,7 +24,7 @@ function on_zencoder_job_done(output_url) {
 
 function poll_zencoder_job(job_id, output_url) {
 
-    $.post("/web_converter/get_status_on_job",
+    $.post("/encoder/get_status_on_job",
         {zencoder_job_id: job_id}).done(function(data) {
 
         data = $.parseJSON(data);
@@ -52,7 +52,7 @@ function poll_zencoder_job(job_id, output_url) {
 
 function on_video_upload_done(url) {
 
-    $.post("/web_converter/add_job",
+    $.post("/encoder/add_job",
         {s3_input_file: url}).done(function(data) {
 
         data = $.parseJSON(data);
@@ -79,7 +79,7 @@ function s3_upload(){
     var s3upload = new S3Upload({
 
         file_dom_selector: '#file',
-        s3_sign_put_url: '/web_converter/sign_s3',
+        s3_sign_put_url: '/uploader/get_signed_s3_url',
 
         onProgress: function(percent, message) {
 
