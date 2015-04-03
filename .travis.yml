@@ -14,7 +14,6 @@ before_script:
   - psql -c 'create database test_database;' -U postgres
   - python manage.py syncdb --noinput
   - python manage.py migrate --noinput
-  - python manage.py collectstatic --noinput
 
 script:
   - python manage.py test
