@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from django.template import RequestContext
 
 from .models import Video
@@ -16,7 +16,10 @@ def upload_view(request):
 def video_detail(request, identifier):
 
     template_name = 'web_converter/detail.html'
-    video = Video.objects.get(identifier=identifier)
+    try:
+        video = Video.objects.get(identifier=identifier)
+    except:
+        raise Http404
 
     context = RequestContext(request, {'video': video})
 
