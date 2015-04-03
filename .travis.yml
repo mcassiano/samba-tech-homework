@@ -19,3 +19,7 @@ deploy:
   app: serene-waters-5463
   on:
     repo: mcassiano/samba-tech-homework
+  run:
+    - "python manage.py syncdb --noinput"
+    - "python manage.py migrate --noinput"
+    - "python manage.py collectstatic --noinput"

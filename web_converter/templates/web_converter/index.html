@@ -52,6 +52,8 @@
           <i class="file icon"></i>
           Selecionar vídeo</label>
 
+          {% csrf_token %}
+
           <input onchange="s3_upload();" type="file" id="file" style="display:none" />
         </p>
 
