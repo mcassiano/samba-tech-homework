@@ -23,7 +23,7 @@ def get_signed_s3_url(request):
  
     expires = int(time.time()+300) # PUT request to S3 must start within X seconds
     amz_headers = "x-amz-acl:public-read" # set the public read permission on the uploaded file
-    resource = '%s/%s' % (S3_BUCKET, object_name)
+    resource = '%s/uploads/vids/%s' % (S3_BUCKET, object_name)
 
     str_to_sign = "PUT\n\n{mime_type}\n{expires}\n{amz_headers}\n/{resource}".format(
         mime_type=mime_type,
@@ -34,7 +34,7 @@ def get_signed_s3_url(request):
 
     sig = urllib.quote_plus(base64.encodestring(hmac.new(AWS_SECRET_KEY, str_to_sign, sha).digest()).strip())
  
-    url = 'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, object_name)
+    url = 'https://%s.s3.amazonaws.com/uploads/vids/%s' % (S3_BUCKET, object_name)
 
     return HttpResponse(json.dumps({
         'signed_request': '{url}?AWSAccessKeyId={access_key}&Expires={expires}&Signature={sig}'.format(

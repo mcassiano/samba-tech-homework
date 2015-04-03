@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+  {% load static from staticfiles %}
   <meta charset="utf-8">
 
   <title>Conversor web</title>
@@ -10,7 +11,7 @@
   <meta name="author" content="Matheus Cassiano Candido">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
   <!-- Semantic UI -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.5/components/icon.min.css">
@@ -22,8 +23,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
-  <script type="text/javascript" src="/static/js/s3upload.js"></script>
-  <script type="text/javascript" src="/static/js/scripts.js"></script>
+  <script type="text/javascript" src="{% static 'js/s3upload.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.6/components/progress.min.js"></script>
 
@@ -41,7 +42,7 @@
 
     <br>
     <div class="logo">
-      <img src="/static/image/cloud.png" class="cloud" />
+      <img src="{% static 'image/cloud.png' %}" class="cloud" />
     </div>
 
     <div class="container">
